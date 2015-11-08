@@ -27,7 +27,7 @@ values."
      auto-completion
      better-defaults
      emacs-lisp
-     git
+     evil-snipe
      markdown
      org
      ;; (shell :variables
@@ -64,7 +64,7 @@ values."
      sql
      shell
      syntax-checking
-     evil-snipe
+     ;;evil-snipe
      ruby
      ruby-on-rails
      purescript
@@ -237,6 +237,16 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
   (add-to-list 'exec-path "~/.cabal/bin/")
+  (setq-default
+    ;; js2-mode
+    js2-basic-offset 2
+    js-indent-level 2
+    ;; web-mode
+    css-indent-offset 2
+    web-mode-markup-indent-offset 2
+    web-mode-css-indent-offset 2
+    web-mode-code-indent-offset 2
+    web-mode-attr-indent-offset 2)
   )
 
 (defun dotspacemacs/user-config ()
@@ -245,8 +255,10 @@ user code."
 layers configuration. You are free to put any user code."
   (golden-ratio-mode 1)
   (whitespace-mode 1)
-   (crosshairs-mode 1)
-   (indent-guide-global-mode 1)
+  (crosshairs-mode 1)
+
+  ;; Indentation
+  (indent-guide-global-mode 1)
 
   ;; Show 80-column marker
   (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
@@ -287,7 +299,7 @@ layers configuration. You are free to put any user code."
  '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
    (quote
-    ("b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "7f5837a7dbf54c2b7c41d94f5eb1373cf63274847d1971037faa24d7f2231eea" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "34e7163479ef3669943b3b9b1fabe639d6e0a0453e0de79cea2c52cb520d3bc4" default)))
+    ("30b7087fdd149a523aa614568dc6bacfab884145f4a67d64c80d6011d4c90837" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "7f5837a7dbf54c2b7c41d94f5eb1373cf63274847d1971037faa24d7f2231eea" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "34e7163479ef3669943b3b9b1fabe639d6e0a0453e0de79cea2c52cb520d3bc4" default)))
  '(haskell-stylish-on-save t)
  '(highlight-symbol-colors
    (--map
