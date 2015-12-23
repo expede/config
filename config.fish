@@ -16,6 +16,7 @@ alias gc  "git commit"
 alias gcm "git commit -m"
 
 alias gAcm "git add -A; git commit -m"
+alias grim "git rebase -i master"
 
 alias gl  "git pull"
 alias gp  "git push"
