@@ -17,6 +17,8 @@
     '(
       crosshairs
       rspec-mode
+      hyde
+      jekyll-modes
       w3m
       yard-mode
       ))
@@ -37,6 +39,14 @@
 (defun expede/init-rspec-mode ()
   "Initialize my package"
   (use-package rspec-mode))
+
+(defun expede/init-hyde ()
+  "Initialize my package"
+  (use-package hyde))
+
+(defun expede/init-jekyll-modes ()
+  "Initialize my package"
+  (use-package jekyll-modes))
 
 (defun expede/init-w3m ()
   "Initialize my package"

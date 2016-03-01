@@ -24,15 +24,14 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      expede
+     spotify
+     semantic
      auto-completion
      better-defaults
      emacs-lisp
      evil-snipe
      markdown
      org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
      spell-checking
      syntax-checking
      version-control
@@ -47,13 +46,15 @@ values."
      emacs-lisp
      go
      html
+     idris
      rcirc
      javascript
      racket
      scala
      git
      github
-     version-control
+     (version-control :variables
+                      version-control-diff-tool 'diff-hl)
      react
      ;; ocaml
      osx
@@ -62,9 +63,11 @@ values."
      purescript
      rust
      sql
-     shell
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
      syntax-checking
-     ;;evil-snipe
+     evil-snipe
      ruby
      ruby-on-rails
      purescript
@@ -74,12 +77,16 @@ values."
               haskell-enable-ghc-mod-support t
               haskell-enable-ghci-ng-support t
               haskell-enable-shm-support     t)
+     (wakatime :variables
+               wakatime-api-key "b04625dd-3e15-4063-8a08-8fd1524727c7"
+               ;; use the actual wakatime path
+               wakatime-cli-path "/usr/local/bin/wakatime")
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(base16-theme)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -117,11 +124,14 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(monokai
+   dotspacemacs-themes '(
+                         sanityinc-solarized-dark
+			                   base16-monokai-dark
+                         solarized-dark
+                         monokai
                          spacemacs-dark
                          spacemacs-light
                          solarized-light
-                         solarized-dark
                          material
                          subatomic
                          toxi
@@ -133,11 +143,12 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Hasklig"
-                               :size   11
+   dotspacemacs-default-font '("Operator Mono SSm" ;; "Input Mono" ;;"Hasklig"
+                               :size   12
                                :weight normal
+                               ;; :weight light
                                :width  normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.2) ;; 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -238,9 +249,11 @@ It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
   (add-to-list 'exec-path "~/.cabal/bin/")
   (setq-default
+
     ;; js2-mode
     js2-basic-offset 2
     js-indent-level 2
+
     ;; web-mode
     css-indent-offset 2
     web-mode-markup-indent-offset 2
@@ -293,20 +306,32 @@ layers configuration. You are free to put any user code."
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
+ '(compilation-message-face (quote default))
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
    (quote
-    ("d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "30b7087fdd149a523aa614568dc6bacfab884145f4a67d64c80d6011d4c90837" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "7f5837a7dbf54c2b7c41d94f5eb1373cf63274847d1971037faa24d7f2231eea" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "34e7163479ef3669943b3b9b1fabe639d6e0a0453e0de79cea2c52cb520d3bc4" default)))
+    ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "20e359ef1818a838aff271a72f0f689f5551a27704bf1c9469a5c2657b417e6c" "d4e9f95acd51433b776f1127143bbc7d0f1d41112d547e5b7a9a506be369dc39" "38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "df3e05e16180d77732ceab47a43f2fcdb099714c1c47e91e8089d2fcf5882ea3" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "30b7087fdd149a523aa614568dc6bacfab884145f4a67d64c80d6011d4c90837" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "7f5837a7dbf54c2b7c41d94f5eb1373cf63274847d1971037faa24d7f2231eea" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "34e7163479ef3669943b3b9b1fabe639d6e0a0453e0de79cea2c52cb520d3bc4" default)))
  '(haskell-stylish-on-save t)
+ '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-symbol-colors
    (--map
     (solarized-color-blend it "#002b36" 0.25)
     (quote
      ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
  '(highlight-symbol-foreground-color "#93a1a1")
+ '(highlight-tail-colors
+   (quote
+    (("#3E3D31" . 0)
+     ("#67930F" . 20)
+     ("#349B8D" . 30)
+     ("#21889B" . 50)
+     ("#968B26" . 60)
+     ("#A45E0A" . 70)
+     ("#A41F99" . 85)
+     ("#3E3D31" . 100))))
  '(hl-bg-colors
    (quote
     ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
@@ -314,11 +339,14 @@ layers configuration. You are free to put any user code."
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(hl-sexp-background-color "#1c1f26")
+ '(magit-diff-use-overlays nil)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
- '(term-default-fg-color "#839496"))
+ '(term-default-fg-color "#839496")
+ '(weechat-color-list
+   (unspecified "#272822" "#3E3D31" "#A20C41" "#F92672" "#67930F" "#A6E22E" "#968B26" "#E6DB74" "#21889B" "#66D9EF" "#A41F99" "#FD5FF0" "#349B8D" "#A1EFE4" "#F8F8F2" "#F8F8F0")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
